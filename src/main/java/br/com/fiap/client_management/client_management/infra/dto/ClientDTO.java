@@ -4,7 +4,7 @@ import br.com.fiap.client_management.client_management.domain.Address;
 import br.com.fiap.client_management.client_management.domain.Client;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record ClientRequestDTO(
+public record ClientDTO(
         @JsonProperty("nome")
         String name,
 
@@ -29,7 +29,7 @@ public record ClientRequestDTO(
         @JsonProperty("cep")
         String zipCode) {
 
-    public static Client toClient(ClientRequestDTO dto){
+    public static Client toClient(ClientDTO dto){
         return Client.of(null, dto.name, dto.cpf, dto.email, dto.telephone,
               Address.of(dto.street, dto.city, dto.country(), dto.zipCode));
     }

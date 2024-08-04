@@ -25,4 +25,9 @@ public class ClientRepositoryGatewayImpl implements ClientRepositoryGateway {
         ClientEntity clientEntity = Client.toClientEntity(client);
         return Client.toClient(clientRepository.save(clientEntity));
     }
+
+    @Override
+    public Client findClientByCpf(String cpf) {
+        return Client.toClient(clientRepository.findClientByCpf(cpf));
+    }
 }
