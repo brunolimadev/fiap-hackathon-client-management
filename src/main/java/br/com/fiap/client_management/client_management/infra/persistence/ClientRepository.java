@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface ClientRepository extends CrudRepository<ClientEntity, UUID> {
+public interface ClientRepository extends CrudRepository<ClientEntity, String> {
 
     @Query("SELECT c FROM ClientEntity c WHERE c.cpf = :cpf")
     ClientEntity findClientByCpf(@Param("cpf") String cpf);

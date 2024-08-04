@@ -8,9 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/cliente")
 public class ClientController {
-
 
     private final ClientService clientService;
 
@@ -27,6 +26,5 @@ public class ClientController {
     public ResponseEntity<ClientResponseDTO> getClientByCpf(@PathVariable String cpf) {
         return ResponseEntity.status(200).body(clientService.findClientByCpf(cpf));
     }
-
 
 }

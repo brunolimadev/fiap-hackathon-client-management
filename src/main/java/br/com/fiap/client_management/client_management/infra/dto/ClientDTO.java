@@ -5,34 +5,27 @@ import br.com.fiap.client_management.client_management.domain.Client;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record ClientDTO(
-        @JsonProperty("nome")
-        String name,
+        @JsonProperty("nome") String name,
 
-        @JsonProperty("email")
-        String email,
+        @JsonProperty("email") String email,
 
-        @JsonProperty("telefone")
-        String telephone,
+        @JsonProperty("telefone") String telephone,
 
-        @JsonProperty("cpf")
-        String cpf,
+        @JsonProperty("cpf") String cpf,
 
-        @JsonProperty("rua")
-        String street,
+        @JsonProperty("rua") String street,
 
-        @JsonProperty("cidade")
-        String city,
+        @JsonProperty("cidade") String city,
 
-        @JsonProperty("estado")
-        String country,
+        @JsonProperty("estado") String province,
 
-        @JsonProperty("cep")
-        String zipCode) {
+        @JsonProperty("pais") String country,
 
-    public static Client toClient(ClientDTO dto){
+        @JsonProperty("cep") String zipCode) {
+
+    public static Client toClient(ClientDTO dto) {
         return Client.of(null, dto.name, dto.cpf, dto.email, dto.telephone,
-              Address.of(dto.street, dto.city, dto.country(), dto.zipCode));
+                Address.of(dto.street, dto.city, dto.province, dto.zipCode, dto.country));
     }
 
 }
-

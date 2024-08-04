@@ -1,0 +1,26 @@
+spring:
+    application.name: client-management
+    datasource:
+        url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/client-management-db}
+        username: ${POSTGRES_USER}
+        password: ${POSTGRES_PASSWORD}
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                jdbc:
+                    lob:
+                        # used to store large objects
+                        non_contextual_creation: true 
+
+#Porta Server
+server:
+    port: 8082
+    servlet:
+        context-path: /api
+
+    
+
+

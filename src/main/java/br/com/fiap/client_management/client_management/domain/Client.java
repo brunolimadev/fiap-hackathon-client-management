@@ -5,7 +5,7 @@ import br.com.fiap.client_management.client_management.infra.persistence.ClientE
 
 import static java.util.Objects.isNull;
 
-public class  Client {
+public class Client {
 
     private String uuid;
     private String cpf;
@@ -26,28 +26,32 @@ public class  Client {
         this.address = address;
     }
 
-    public static Client of(String uuid, String name, String cpf, String email, String telephone, Address address){
+    public static Client of(String uuid, String name, String cpf, String email, String telephone, Address address) {
         validate(name, cpf, email, telephone, address);
         return new Client(uuid, name, cpf, email, telephone, address);
     }
 
-    public static ClientEntity toClientEntity(Client client){
+    public static ClientEntity toClientEntity(Client client) {
         Address address = client.getAddress();
 
         return new ClientEntity(null, client.getName(), client.getEmail(), client.getCpf(), client.getTelephone(),
-                new AddressEntity(null,address.getStreet(), address.getCity(), address.getCountry(), address.getZipCode()));
+                new AddressEntity(null, address.getStreet(), address.getCity(), address.getProvince(),
+                        address.getZipCode(), address.getCountry()));
     }
-    public static Client toClient(ClientEntity clientEntity){
+
+    public static Client toClient(ClientEntity clientEntity) {
 
         AddressEntity addressEntity = clientEntity.getAddress();
 
         Address address = Address.of(
                 addressEntity.getStreet(),
                 addressEntity.getCity(),
-                addressEntity.getCountry(),
-                addressEntity.getZipCode());
+                addressEntity.getProvince(),
+                addressEntity.getZipCode(),
+                addressEntity.getCountry());
 
-        return Client.of(clientEntity.getId(), clientEntity.getName(),clientEntity.getCpf(), clientEntity.getEmail(), clientEntity.getTelephone(),address);
+        return Client.of(clientEntity.getId(), clientEntity.getName(), clientEntity.getCpf(), clientEntity.getEmail(),
+                clientEntity.getTelephone(), address);
 
     }
 

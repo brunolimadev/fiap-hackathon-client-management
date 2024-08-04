@@ -5,40 +5,34 @@ import br.com.fiap.client_management.client_management.domain.Client;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public record ClientResponseDTO(
-        @JsonProperty("nome")
-        String name,
+        @JsonProperty("nome") String name,
 
-        @JsonProperty("email")
-        String email,
+        @JsonProperty("email") String email,
 
-        @JsonProperty("telefone")
-        String telephone,
+        @JsonProperty("telefone") String telephone,
 
-        @JsonProperty("cpf")
-        String cpf,
+        @JsonProperty("cpf") String cpf,
 
-        @JsonProperty("rua")
-        String street,
+        @JsonProperty("rua") String street,
 
-        @JsonProperty("cidade")
-        String city,
+        @JsonProperty("cidade") String city,
 
-        @JsonProperty("estado")
-        String country,
+        @JsonProperty("estado") String province,
 
-        @JsonProperty("cep")
-        String zipCode) {
+        @JsonProperty("cep") String zipCode,
 
-    public static Client toClient(ClientResponseDTO dto){
+        @JsonProperty("pais") String country) {
+
+    public static Client toClient(ClientResponseDTO dto) {
         return Client.of(null, dto.name, dto.cpf, dto.email, dto.telephone,
-              Address.of(dto.street, dto.city, dto.country(), dto.zipCode));
+                Address.of(dto.street, dto.city, dto.province, dto.zipCode, dto.country));
     }
 
-    public static ClientResponseDTO toDto(Client client){
+    public static ClientResponseDTO toDto(Client client) {
         Address address = client.getAddress();
-        return new ClientResponseDTO(client.getName(),client.getEmail(),client.getTelephone(),client.getCpf(),
-                address.getStreet(),address.getCity(),address.getCountry(),address.getZipCode());
+        return new ClientResponseDTO(client.getName(), client.getEmail(), client.getTelephone(), client.getCpf(),
+                address.getStreet(), address.getCity(), address.getProvince(), address.getZipCode(),
+                address.getCountry());
     }
 
 }
-

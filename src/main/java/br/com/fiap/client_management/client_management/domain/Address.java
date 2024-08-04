@@ -6,22 +6,25 @@ public class Address {
 
     private String city;
 
-    private String country;
+    private String province;
 
     private String zipCode;
+
+    private String country;
 
     public Address() {
     }
 
-    private Address(String street, String city, String country, String zipCode) {
+    private Address(String street, String city, String province, String zipCode, String country) {
         this.street = street;
         this.city = city;
-        this.country = country;
+        this.province = province;
         this.zipCode = zipCode;
+        this.country = country;
     }
 
-    public static Address of(String street, String city, String country, String zipCode) {
-        return new Address(street, city, country, zipCode);
+    public static Address of(String street, String city, String province, String zipCode, String country) {
+        return new Address(street, city, province, zipCode, country);
     }
 
     public String getStreet() {
@@ -55,4 +58,13 @@ public class Address {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
 }
