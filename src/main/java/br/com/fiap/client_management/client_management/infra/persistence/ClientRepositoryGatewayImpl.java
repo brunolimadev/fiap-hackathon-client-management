@@ -2,6 +2,8 @@ package br.com.fiap.client_management.client_management.infra.persistence;
 
 import br.com.fiap.client_management.client_management.domain.Client;
 import br.com.fiap.client_management.client_management.gateway.ClientRepositoryGateway;
+import br.com.fiap.client_management.client_management.infra.controller.Exceptions.ClientAlreadyRegisteredException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,8 +24,14 @@ public class ClientRepositoryGatewayImpl implements ClientRepositoryGateway {
 
     @Override
     public Client save(Client client) {
-        ClientEntity clientEntity = Client.toClientEntity(client);
-        return Client.toClient(clientRepository.save(clientEntity));
+
+        ClientEntity clientEntity = null;
+        try {
+            clientEntity = Client.toClientEntity(client);
+            return Client.toClient(clientRepository.save(clientEntity));
+        } catch (DataIntegrityViolationException e) {
+            throw new ClientAlreadyRegisteredException("Esse cliente já se encontra cadastrado no sistema!");
+        }
     }
 
     @Override

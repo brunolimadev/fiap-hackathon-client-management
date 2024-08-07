@@ -22,6 +22,7 @@ public class ClientEntity {
 
     private String email;
 
+    @Column(unique = true)
     private String cpf;
 
     private String telephone;

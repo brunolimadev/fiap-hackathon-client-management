@@ -56,20 +56,27 @@ public class Client {
     }
 
     private static void validate(String name, String cpf, String email, String telephone, Address address) {
-        if (isNull(name) || name.isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty");
+
+        final String CPF_REGEX = "^\\d{11}$";
+        final String NAME_REGEX = "^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$";
+        final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        final String TELEPHONE_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+
+
+        if (isNull(name) || name.isEmpty() || !name.matches(NAME_REGEX)) {
+            throw new IllegalArgumentException("O nome informado é inválido.");
         }
-        if (isNull(cpf) || cpf.isEmpty()) {
-            throw new IllegalArgumentException("CPF cannot be null or empty");
+        if (isNull(cpf) || cpf.isEmpty() || !cpf.matches(CPF_REGEX)) {
+            throw new IllegalArgumentException("Informe um CPF com 11 números sem pontuação.");
         }
-        if (isNull(email) || email.isEmpty()) {
-            throw new IllegalArgumentException("Email cannot be null or empty");
+        if (isNull(email) || email.isEmpty() || !email.matches(EMAIL_REGEX) ) {
+            throw new IllegalArgumentException("O Email informado não é válido. ");
         }
-        if (isNull(telephone) || telephone.isEmpty()) {
-            throw new IllegalArgumentException("Telephone cannot be null or empty");
+        if (isNull(telephone) || telephone.isEmpty() || !email.matches(TELEPHONE_REGEX) ) {
+            throw new IllegalArgumentException("O telefone informado não é válido. ");
         }
         if (isNull(address)) {
-            throw new IllegalArgumentException("Address cannot be null");
+            throw new IllegalArgumentException("Preencha os campos do endereço com valores válidos.");
         }
     }
 
