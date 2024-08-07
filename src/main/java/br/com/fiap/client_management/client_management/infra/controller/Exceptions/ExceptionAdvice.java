@@ -44,4 +44,14 @@ public class ExceptionAdvice {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDto);
     }
 
+    @ExceptionHandler({ ClientNotFoundException.class} )
+    public ResponseEntity<ErrorDto> handleEmailAlreadyInUseException(ClientNotFoundException e) {
+        ErrorDto errorDto = new ErrorDto(
+                "Dados Inválidos",
+                e.getMessage(),
+                "500",
+                null);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDto);
+    }
+
 }
