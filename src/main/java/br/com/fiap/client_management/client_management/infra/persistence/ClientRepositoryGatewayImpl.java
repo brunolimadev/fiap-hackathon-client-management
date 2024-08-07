@@ -18,11 +18,6 @@ public class ClientRepositoryGatewayImpl implements ClientRepositoryGateway {
     }
 
     @Override
-    public List<Client> findAll() {
-        return null;
-    }
-
-    @Override
     public Client save(Client client) {
 
         ClientEntity clientEntity = null;

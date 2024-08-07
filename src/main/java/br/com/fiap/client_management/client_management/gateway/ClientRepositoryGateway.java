@@ -8,8 +8,6 @@ import java.util.List;
 @Repository
 public interface ClientRepositoryGateway {
 
-    List<Client> findAll();
-
     Client save(Client client);
 
     Client findClientByCpf(String cpf);

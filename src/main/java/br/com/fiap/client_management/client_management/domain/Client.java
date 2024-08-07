@@ -26,17 +26,39 @@ public class Client {
         this.address = address;
     }
 
-    public static Client of(String uuid, String name, String cpf, String email, String telephone, Address address) {
+    public static Client of(
+            String uuid,
+            String name,
+            String cpf,
+            String email,
+            String telephone,
+            Address address) {
         validate(name, cpf, email, telephone, address);
-        return new Client(uuid, name, cpf, email, telephone, address);
+        return new Client(
+                uuid,
+                name,
+                cpf,
+                email,
+                telephone,
+                address);
     }
 
     public static ClientEntity toClientEntity(Client client) {
         Address address = client.getAddress();
 
-        return new ClientEntity(null, client.getName(), client.getEmail(), client.getCpf(), client.getTelephone(),
-                new AddressEntity(null, address.getStreet(), address.getCity(), address.getProvince(),
-                        address.getZipCode(), address.getCountry()));
+        return new ClientEntity(
+                null,
+                client.getName(),
+                client.getEmail(),
+                client.getCpf(),
+                client.getTelephone(),
+                new AddressEntity(
+                        null,
+                        address.getStreet(),
+                        address.getCity(),
+                        address.getProvince(),
+                        address.getCountry(),
+                        address.getZipCode()));
     }
 
     public static Client toClient(ClientEntity clientEntity) {
@@ -50,8 +72,13 @@ public class Client {
                 addressEntity.getZipCode(),
                 addressEntity.getCountry());
 
-        return Client.of(clientEntity.getId(), clientEntity.getName(), clientEntity.getCpf(), clientEntity.getEmail(),
-                clientEntity.getTelephone(), address);
+        return Client.of(
+                clientEntity.getId(),
+                clientEntity.getName(),
+                clientEntity.getCpf(),
+                clientEntity.getEmail(),
+                clientEntity.getTelephone(),
+                address);
 
     }
 
@@ -70,10 +97,10 @@ public class Client {
             throw new IllegalArgumentException("Informe um CPF com 11 números sem pontuação.");
         }
         if (isNull(email) || email.isEmpty() || !email.matches(EMAIL_REGEX) ) {
-            throw new IllegalArgumentException("O Email informado não é válido. ");
+            throw new IllegalArgumentException("O Email informado não é válido.");
         }
         if (isNull(telephone) || telephone.isEmpty() || !email.matches(TELEPHONE_REGEX) ) {
-            throw new IllegalArgumentException("O telefone informado não é válido. ");
+            throw new IllegalArgumentException("O telefone informado não é válido.");
         }
         if (isNull(address)) {
             throw new IllegalArgumentException("Preencha os campos do endereço com valores válidos.");

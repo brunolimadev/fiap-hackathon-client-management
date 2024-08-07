@@ -24,23 +24,6 @@ public class ExceptionAdvice {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDto);
     }
 
-    @ExceptionHandler({ MethodArgumentNotValidException.class })
-    public ResponseEntity<ErrorDto> handleValidationException(MethodArgumentNotValidException ex) {
-        List<ErrorFieldDto> errorFields = new ArrayList<>();
-
-        ex.getBindingResult().getFieldErrors().forEach(error -> {
-            errorFields.add(new ErrorFieldDto(error.getField(), error.getDefaultMessage()));
-        });
-
-        ErrorDto errorDto = new ErrorDto(
-                "Dados inválidos",
-                "Por favor, verifique os dados enviados e tente novamente.",
-                "400",
-                errorFields);
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDto);
-    }
-
     @ExceptionHandler({ NoResourceFoundException.class })
     public ResponseEntity<ErrorDto> handleNotFoundException(NoResourceFoundException ex) {
         ErrorDto errorDto = new ErrorDto(
