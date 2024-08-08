@@ -3,25 +3,44 @@ package br.com.fiap.client_management.client_management.infra.dto;
 import br.com.fiap.client_management.client_management.domain.Address;
 import br.com.fiap.client_management.client_management.domain.Client;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public record ClientResponseDTO(
-        @JsonProperty("nome") String name,
+        @Schema(description = "Nome", example = "João da Silva")
+        @JsonProperty("nome")
+        String name,
 
-        @JsonProperty("email") String email,
+        @Schema(description = "Email", example = "joao@example.com")
+        @JsonProperty("email")
+        String email,
 
-        @JsonProperty("telefone") String telephone,
+        @Schema(description = "Telefone", example = "55 11 91234-5678")
+        @JsonProperty("telefone")
+        String telephone,
 
-        @JsonProperty("cpf") String cpf,
+        @Schema(description = "Cpf", example = "João da Silva")
+        @JsonProperty("cpf")
+        String cpf,
 
-        @JsonProperty("rua") String street,
+        @Schema(description = "Rua", example = "Rua A")
+        @JsonProperty("rua")
+        String street,
 
-        @JsonProperty("cidade") String city,
+        @Schema(description = "Cidade", example = "Guarulhos")
+        @JsonProperty("cidade")
+        String city,
 
-        @JsonProperty("estado") String province,
+        @Schema(description = "Estado", example = "São Paulo")
+        @JsonProperty("estado")
+        String province,
 
-        @JsonProperty("cep") String zipCode,
+        @Schema(description = "ZipCode", example = "22587526")
+        @JsonProperty("cep")
+        String zipCode,
 
-        @JsonProperty("pais") String country) {
+        @Schema(description = "Pais", example = "Brasil")
+        @JsonProperty("pais")
+        String country) {
 
     public static Client toClient(ClientResponseDTO dto) {
         return Client.of(null, dto.name, dto.cpf, dto.email, dto.telephone,
