@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.fiap.client_management</groupId>
 	<artifactId>client-management</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>client-management</name>
 	<description>Microservice responsible for customer management</description>
 	<url/>
