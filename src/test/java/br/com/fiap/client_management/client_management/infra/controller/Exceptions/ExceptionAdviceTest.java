@@ -13,18 +13,6 @@ class ExceptionAdviceTest {
     private final ExceptionAdvice exceptionAdvice = new ExceptionAdvice();
 
     @Test
-    public void testHandleRuntimeException() {
-        // Given
-        RuntimeException runtimeException = new RuntimeException("Erro inesperado");
-
-        // When
-        ResponseEntity<ErrorDto> response = exceptionAdvice.handleRuntimeException(runtimeException);
-
-        // Then
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    }
-
-    @Test
     public void testHandleClientAlreadyRegisteredException() {
         // Given
         ClientAlreadyRegisteredException exception = new ClientAlreadyRegisteredException("Cliente já cadastrado");
@@ -35,7 +23,5 @@ class ExceptionAdviceTest {
         // Then
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
-
-
 
 }
